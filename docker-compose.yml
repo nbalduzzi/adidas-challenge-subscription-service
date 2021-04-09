@@ -22,6 +22,8 @@ services:
             MONGO_INITDB_ROOT_PASSWORD: adidas
         ports:
             - "27017:27017"
+        volumes:
+            - ./mongodata:/data/db
         networks:
             - adidas_challenge
 
