@@ -27,4 +27,4 @@ services:
 
 networks:
     adidas_challenge:
-        external: true
+        name: adidas_challenge

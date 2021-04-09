@@ -47,20 +47,22 @@ export class SubscriptionController implements ISubscriptionController {
       subscription,
     );
 
-    this.subscriptionGateway
-      .sendEmail(createdSubscription.email)
-      .then(async () => {
-        await this.subscriptionService.updateEmailNotificationStatus(
-          createdSubscription.id,
-          EmailStatus.SENT,
-        );
-      })
-      .catch(async () => {
-        await this.subscriptionService.updateEmailNotificationStatus(
-          createdSubscription.id,
-          EmailStatus.ERROR,
-        );
-      });
+    if (createdSubscription.consent) {
+      this.subscriptionGateway
+        .sendEmail(createdSubscription.email)
+        .then(async () => {
+          await this.subscriptionService.updateEmailNotificationStatus(
+            createdSubscription.id,
+            EmailStatus.SENT,
+          );
+        })
+        .catch(async () => {
+          await this.subscriptionService.updateEmailNotificationStatus(
+            createdSubscription.id,
+            EmailStatus.ERROR,
+          );
+        });
+    }
 
     return createdSubscription;
   }
