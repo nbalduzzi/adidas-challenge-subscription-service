@@ -34,8 +34,7 @@ export class AuthorizationMiddleware implements NestMiddleware {
         next(new UnauthorizedException('unauthorized'));
       }
 
-      // if (Date.now() > decoded.timestamp + +process.env.MAX_REQUEST_MS_GAP) {
-      if (Date.now() > decoded.timestamp + 9999999999) {
+      if (Date.now() > decoded.timestamp + +process.env.MAX_REQUEST_MS_GAP) {
         next(new UnauthorizedException('unauthorized'));
       }
 
