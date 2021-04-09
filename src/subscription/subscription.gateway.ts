@@ -21,6 +21,7 @@ export class SubscriptionGateway implements ISubscriptionGateway {
         )
         .toPromise();
     } catch (e) {
+      console.error(e);
       throw new HttpException(e.response.data.message, e.response.status);
     }
   }

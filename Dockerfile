@@ -8,4 +8,4 @@ WORKDIR /subscription-service
 RUN npm install --only=prod
 RUN npm run build
 
-CMD [ "npm", "start" ]
+CMD [ "npm", "run", "start:prod" ]
