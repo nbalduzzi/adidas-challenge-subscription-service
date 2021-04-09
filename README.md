@@ -28,6 +28,8 @@ Adidas Challenge Subscription Service API
 
 5. I choose `paginate` the `get all subscriptions` with a simple page number pagination strategy. Other way is using an `infinity scroll pagination` strategy where pass as query string parameter the last evaluation key (last item on the results) to get the new data. We can discuse later ;)
 
+6. I desided not implementing a `Queue producer` from any technology like `RabbitMQ` or `Redis` to dont adding complex layers on the project, but is a better solution than the http async call from subscriptor service for sending the email, is a better aproach implement a `queue producer`.
+
 ## Security
 
 ### Authorization Header
