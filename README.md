@@ -30,6 +30,9 @@ Adidas Challenge Subscription Service API
 
 6. I desided not implementing a `Queue producer` from any technology like `RabbitMQ` or `Redis` to dont adding complex layers on the project, but is a better solution than the http async call from subscriptor service for sending the email, is a better aproach implement a `queue producer`.
 
+7. The `.env.production` file is in the repository and the information inside is the same as `.env.development` for challenge purpose, but this must not be like this. The production enviroment variables must be in some `vpc` or some secured storage and encrypted, and must be injected (or replaced) on deploy step.
+The `SECRET` inside must be different of `development env`, the `EMAIL_SERVICE_URL` should point to the production url and the `MONGODB` variables must be all different as `development env` and that mongo must be in a sharded cluster for distribute across multiple machines.
+
 ## Security
 
 ### Authorization Header
@@ -153,8 +156,8 @@ This pipeline executes on push to any branch
 |---|---|---| `integration test` |
 | Deploy `Dev` | Deploy builded image to `Dev` environment | `Automatic` *(On `test step success`)* | Execute command to deploy to `development` environment |
 | Test `e2e` | Check Overall API endpoints on `dev` | `Manual` *(On `deploy dev` step success)* | Execute `e2e` tests |
-| Deploy `Staging` | Deploy builded image to `Staging` environment | `Manual` *(On `deploy dev` step success)* | Execute command to deploy to `staging` environment |
-| Deploy `Production` | Deploy builded image to `Production` environment | `Manual` *(On `deploy dev` step success)* | Execute command to deploy to `production` environment |
+| Deploy `Staging` | Deploy builded image to `Staging` environment | `Manual` *(On `deploy dev` step success)* | `Replace` or `inject` the `env values` and execute command to deploy to `staging` environment |
+| Deploy `Production` | Deploy builded image to `Production` environment | `Manual` *(On `deploy dev` step success)* | `Replace` or `inject` the `env values` and execute command to deploy to `production` environment |
 
 ## Kubernetes
 
